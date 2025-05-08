@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="LabMaui.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:LabMaui"
+    Title="LabMaui"
+    FlyoutBehavior="Flyout">
+
+    <FlyoutItem Title="Главная">
+        <ShellContent 
+            Title="Home"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage">
+        </ShellContent>
+    </FlyoutItem>
+
+    <!-- Калькулятор -->
+    <FlyoutItem Title="Калькулятор" Icon="calculator.png">
+        <ShellContent 
+            Title="Calculator"
+            ContentTemplate="{DataTemplate local:CalculatorPage}" 
+            Route="CalculatorPage">
+        </ShellContent>
+    </FlyoutItem>
+    
+    <!-- Интеграл -->
+    <FlyoutItem Title="Интеграл" Icon="integral.png">
+        <ShellContent
+            Title="Integral calculating"
+            ContentTemplate="{DataTemplate local:IntegralAsync}"
+            Route="IntegralAsync">
+        </ShellContent>
+    </FlyoutItem>
+
+    <!-- Спа сервис -->
+    <FlyoutItem Title="Спа сервис" Icon="spa.png">
+        <ShellContent
+            Title="Spa service"
+            Route="SpaService"
+            ContentTemplate="{DataTemplate local:SpaService}">
+        </ShellContent>
+    </FlyoutItem>
+    
+    <!-- Конвертер -->
+    <FlyoutItem Title="Конвертер валют" Icon="converter.png">
+        <ShellContent
+            Title="Converter"
+            Route="Converter"
+            ContentTemplate="{DataTemplate local:Converter}">
+        </ShellContent>
+    </FlyoutItem>
+</Shell>

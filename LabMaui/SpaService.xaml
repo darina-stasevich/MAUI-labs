@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LabMaui.SpaService">
+    <ContentPage.Content>
+        <VerticalStackLayout>
+            <Picker
+                x:Name="procedureTypePicker" 
+                FontSize="30"
+                Title="Выберите тип процедуры"
+                SelectedIndexChanged="ProcedureTypePicker_OnSelectedIndexChanged"
+                ItemDisplayBinding="{Binding Name}" />
+            <CollectionView x:Name="ProcedureCollectionView"
+                            ItemsSource="{Binding _procedures}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label FontSize="20"
+                                   Text="{Binding ProcedureName}" />
+                            <Label FontSize="10"
+                                   Text="{Binding Information}" 
+                                   TextColor="{AppThemeBinding Light=DarkGrey, Dark=LightGrey}"/>
+                            <Label FontSize="15"
+                                   Text="{Binding Price, StringFormat='Цена: {0:C}'}"
+                                   TextColor="ForestGreen"
+                                   HorizontalOptions="End"
+                                   />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

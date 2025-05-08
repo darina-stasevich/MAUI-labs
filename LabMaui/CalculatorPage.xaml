@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LabMaui.CalculatorPage">
+    <ContentPage.Resources>
+        <Style x:Key="DownPartButtonStyle" 
+               TargetType="Button">
+            <Setter Property="CornerRadius"
+                    Value="5" />
+            <Setter Property="TextColor"
+                    Value="Black" />
+            <Setter Property="FontSize"
+                    Value="20" />
+            <Setter Property="Margin"
+                    Value="2" />
+        </Style>
+        <Style x:Key="OperationButtonStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource DownPartButtonStyle}">
+            <Setter Property="BackgroundColor"
+                    Value="LightGrey" />
+        </Style>
+        <Style x:Key="NumberButtonStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource DownPartButtonStyle}">
+            <Setter Property="BackgroundColor"
+                    Value="Honeydew" />
+        </Style>
+        <Style x:Key="EqualsButtonStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource DownPartButtonStyle}">
+            <Setter Property="BackgroundColor"
+                    Value="CornflowerBlue" />
+        </Style>
+        <Style x:Key="MemoryButtonStyle"
+               TargetType="Button">
+            <Setter Property="FontSize"
+                    Value="14" />
+            <Setter Property="TextColor"
+                    Value="Black" />
+            <Setter Property="BackgroundColor"
+                    Value="White" />
+            <Setter Property="Margin"
+                    Value="2" />
+            <Setter Property="BorderColor"
+                    Value="LightSlateGrey" />
+            <Setter Property="BorderWidth"
+                    Value="1" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="2*,5*">
+        <Border Grid.Row="0"
+                StrokeShape="Rectangle"
+                Background="White">
+            <VerticalStackLayout>
+                <ScrollView VerticalScrollBarVisibility="Always"
+                            HeightRequest="60"
+                            HorizontalScrollBarVisibility="Default"
+                            HorizontalOptions="FillAndExpand">
+                    <Label
+                        x:Name="LabelHistory"
+                        Text=""
+                        HorizontalTextAlignment="End"
+                        TextColor="LightSlateGrey"
+                        FontSize="20"
+                        LineBreakMode="WordWrap" />
+                </ScrollView>
+                <ScrollView VerticalScrollBarVisibility="Always"
+                            HeightRequest="80"
+                            HorizontalScrollBarVisibility="Default"
+                            HorizontalOptions="FillAndExpand">
+                    <Label
+                        x:Name="LabelCurrent"
+                        Text="0"
+                        HorizontalTextAlignment="End"
+                        TextColor="Black"
+                        FontSize="40"
+                        LineBreakMode="WordWrap" />
+                </ScrollView>
+                <Grid ColumnDefinitions="*,*,*,*,*">
+                    <Button
+                        x:Name="ButtonMc"
+                        ClassId="Memory"
+                        Grid.Column="0"
+                        Clicked="OnButtonClicked"
+                        Style="{StaticResource MemoryButtonStyle}"
+                        Text="MC" />
+                    <Button
+                        x:Name="ButtonMr"
+                        ClassId="Memory"
+                        Grid.Column="1"
+                        Clicked="OnButtonClicked"
+                        Style="{StaticResource MemoryButtonStyle}"
+                        Text="MR" />
+                    <Button
+                        x:Name="ButtonMPlus"
+                        ClassId="Memory"
+                        Grid.Column="2"
+                        Clicked="OnButtonClicked"
+                        Style="{StaticResource MemoryButtonStyle}"
+                        Text="M+" />
+                    <Button
+                        x:Name="ButtonMMinus"
+                        ClassId="Memory"
+                        Grid.Column="3"
+                        Clicked="OnButtonClicked"
+                        Style="{StaticResource MemoryButtonStyle}"
+                        Text="M-" />
+                    <Button
+                        x:Name="ButtonMs"
+                        ClassId="Memory"
+                        Grid.Column="4"
+                        Clicked="OnButtonClicked"
+                        Style="{StaticResource MemoryButtonStyle}"
+                        Text="MS" />
+                </Grid>
+            </VerticalStackLayout>
+        </Border>
+        <Grid Grid.Row="1"
+              RowDefinitions="*, *, *, *, *"
+              ColumnDefinitions="*, *, *, *, *"
+              RowSpacing="5"
+              ColumnSpacing="5"
+              BackgroundColor="LightSlateGrey">
+
+            <Button
+                x:Name="ButtonSqrt"
+                ClassId="Operation"
+                Grid.Row="1"
+                Grid.Column="0"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource OperationButtonStyle}"
+                Text="√" />
+            <Button
+                x:Name="ButtonPercent"
+                ClassId="Operation"
+                Grid.Row="0"
+                Grid.Column="0"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource OperationButtonStyle}"
+                Text="%" />
+            <Button
+                x:Name="ButtonCe"
+                ClassId="Clear"
+                Grid.Row="0"
+                Grid.Column="1"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource OperationButtonStyle}"
+                Text="CE" />
+            <Button
+                x:Name="ButtonC"
+                ClassId="Clear"
+                Grid.Row="0"
+                Grid.Column="2"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource OperationButtonStyle}"
+                Text="C" />
+            <Button
+                x:Name="ButtonDelete"
+                ClassId="Clear"
+                Grid.Row="0"
+                Grid.Column="3"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource OperationButtonStyle}"
+                Text="Del" />
+            <Button
+                x:Name="ButtonDigit7"
+                ClassId="Digit"
+                Grid.Row="1"
+                Grid.Column="1"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource NumberButtonStyle}"
+                Text="7" />
+            <Button
+                x:Name="ButtonSquare"
+                ClassId="Operation"
+                Grid.Row="2"
+                Grid.Column="0"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource OperationButtonStyle}"
+                Text="x^2" />
+            <Button
+                x:Name="ButtonDigit8"
+                ClassId="Digit"
+                Grid.Row="1"
+                Grid.Column="2"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource NumberButtonStyle}"
+                Text="8" />
+            <Button
+                x:Name="ButtonDigit9"
+                ClassId="Digit"
+                Grid.Row="1"
+                Grid.Column="3"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource NumberButtonStyle}"
+                Text="9" />
+            <Button
+                x:Name="ButtonDivide"
+                ClassId="Arithmetic"
+                Grid.Row="0"
+                Grid.Column="4"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource OperationButtonStyle}"
+                Text="/" />
+            <Button
+                x:Name="ButtonInverse"
+                ClassId="Operation"
+                Grid.Row="3"
+                Grid.Column="0"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource OperationButtonStyle}"
+                Text="1/x" />
+            <Button
+                x:Name="ButtonDigit4"
+                ClassId="Digit"
+                Grid.Row="2"
+                Grid.Column="1"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource NumberButtonStyle}"
+                Text="4" />
+            <Button
+                x:Name="ButtonDigit5"
+                ClassId="Digit"
+                Grid.Row="2"
+                Grid.Column="2"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource NumberButtonStyle}"
+                Text="5" />
+            <Button
+                x:Name="ButtonDigit6"
+                ClassId="Digit"
+                Grid.Row="2"
+                Grid.Column="3"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource NumberButtonStyle}"
+                Text="6" />
+            <Button
+                x:Name="ButtonMultiply"
+                ClassId="Arithmetic"
+                Grid.Row="1"
+                Grid.Column="4"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource OperationButtonStyle}"
+                Text="*" />
+            <Button
+                x:Name="Button10Pow"
+                ClassId="Operation"
+                Grid.Row="4"
+                Grid.Column="0"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource OperationButtonStyle}"
+                Text="10^x" />
+            <Button
+                x:Name="ButtonDigit1"
+                ClassId="Digit"
+                Grid.Row="3"
+                Grid.Column="1"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource NumberButtonStyle}"
+                Text="1" />
+            <Button
+                x:Name="ButtonDigit2"
+                ClassId="Digit"
+                Grid.Row="3"
+                Grid.Column="2"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource NumberButtonStyle}"
+                Text="2" />
+            <Button
+                x:Name="ButtonDigit3"
+                ClassId="Digit"
+                Grid.Row="3"
+                Grid.Column="3"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource NumberButtonStyle}"
+                Text="3" />
+            <Button
+                x:Name="ButtonMinus"
+                ClassId="Arithmetic"
+                Grid.Row="2"
+                Grid.Column="4"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource OperationButtonStyle}"
+                Text="-" />
+            <Button
+                x:Name="ButtonNegate"
+                ClassId="Operation"
+                Grid.Row="4"
+                Grid.Column="1"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource NumberButtonStyle}"
+                Text="+/-" />
+            <Button
+                x:Name="ButtonDigit0"
+                ClassId="Digit"
+                Grid.Row="4"
+                Grid.Column="2"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource NumberButtonStyle}"
+                Text="0" />
+            <Button
+                x:Name="ButtonComma"
+                ClassId="Digit"
+                Grid.Row="4"
+                Grid.Column="3"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource NumberButtonStyle}"
+                Text="," />
+            <Button
+                x:Name="ButtonEquals"
+                ClassId="Equals"
+                Grid.Row="4"
+                Grid.Column="4"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource EqualsButtonStyle}"
+                Text="=" />
+            <Button
+                x:Name="ButtonPlus"
+                ClassId="Arithmetic"
+                Grid.Row="3"
+                Grid.Column="4"
+                Clicked="OnButtonClicked"
+                Style="{StaticResource OperationButtonStyle}"
+                Text="+" />
+        </Grid>
+        <Label />
+    </Grid>
+</ContentPage>

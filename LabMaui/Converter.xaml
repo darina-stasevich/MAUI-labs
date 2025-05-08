@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LabMaui.Converter">
+    <ContentPage.Resources>
+        <Style x:Key="PickerStyle"
+               TargetType="Picker">
+            <Setter Property="Title"
+                    Value="Выберите валюту" />
+
+            <Setter Property="TitleColor"
+                    Value="{AppThemeBinding Light=DarkGrey, Dark=LightGrey}" />
+
+            <Setter Property="VerticalOptions"
+                    Value="End" />
+
+            <Setter Property="HeightRequest"
+                    Value="60" />
+            <Setter Property="HorizontalOptions"
+                    Value="Fill" />
+
+            <Setter Property="ItemsSource"
+                    Value="{Binding _rates}" />
+        </Style>
+        <Style x:Key="EntryStyle"
+               TargetType="Entry">
+            <Setter Property="VerticalOptions"
+                    Value="End" />
+            <Setter Property="Placeholder"
+                    Value="Сумма" />
+            <Setter Property="HeightRequest"
+                    Value="40" />
+            <Setter Property="Keyboard"
+                    Value="Numeric" />
+            <Setter Property="MaximumWidthRequest"
+                    Value="100" />
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <VerticalStackLayout>
+            <DatePicker x:Name="DatePicker"
+                        DateSelected="DatePicker_OnDateSelected" />
+            <Grid RowDefinitions="Auto,Auto"
+                  ColumnDefinitions="Auto, *, 45">
+
+                <Entry Grid.Row="0"
+                       Grid.Column="0"
+                       x:Name="FromEntry"
+                       Style="{StaticResource EntryStyle}"
+                       TextChanged="FromEntry_OnTextChanged" />
+                <Picker Grid.Row="0"
+                        Grid.Column="1"
+                        x:Name="FromPicker"
+                        Style="{StaticResource PickerStyle}"
+                        ItemDisplayBinding="{Binding Cur_Name}"
+                        SelectedIndexChanged="FromPicker_OnSelectedIndexChanged" />
+                <Entry Grid.Row="1"
+                       Grid.Column="0"
+                       x:Name="ToEntry"
+                       Style="{StaticResource EntryStyle}"
+                       TextChanged="ToEntry_OnTextChanged" />
+                <Picker Grid.Row="1"
+                        Grid.Column="1"
+                        x:Name="ToPicker"
+                        Style="{StaticResource PickerStyle}"
+                        ItemDisplayBinding="{Binding Cur_Name}"
+                        SelectedIndexChanged="ToPicker_OnSelectedIndexChanged" />
+                <Button Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="2"
+                        Text="⇅"
+                        Height="20"
+                        Width="20"
+                        FontSize="20"
+                        BackgroundColor="Transparent"
+                        TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"
+                        Clicked="Button_OnClicked" />
+            </Grid>
+            <Label x:Name="DescribeLabel"
+                   Margin="0, 25, 0, 25"/>
+            <CollectionView x:Name="RatesCollectionView"
+                            ItemsSource="{Binding _rates}"
+                            VerticalOptions="EndAndExpand"
+                            Margin="20">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout>
+                                <Label Text="{Binding Cur_OfficialRate}" />
+                                <Label Text=" BYN"></Label>
+                                <Label Text=" ⇄ "></Label>
+                                <Label Text="{Binding Cur_Scale}" />
+                                <Label Text=" "></Label>
+                                <Label Text="{Binding Cur_Abbreviation}" />
+
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>
